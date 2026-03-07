@@ -1,0 +1,3 @@
+[submodule "deps/genesis-agi"]
+	path = deps/genesis-agi
+	url = https://github.com/H4V1K-dev/genesis-agi

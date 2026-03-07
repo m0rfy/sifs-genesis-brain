@@ -1,0 +1,12 @@
+# Brain config example (BRAIN_CONTRACT). Load in Rust when TOML parsing is added.
+# Until then, defaults in BrainConfig::default() match this.
+
+[brain]
+n_neurons = 1000
+v0 = 0.02
+night_interval = 100
+
+# [sifs] — константы из core.py; в коде заданы явно (K, PHI, FIB, W).
+# При необходимости переопределение через конфиг:
+# k = 0.10132
+# phi = 1.618034

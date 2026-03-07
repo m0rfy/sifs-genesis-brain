@@ -1,0 +1,15 @@
+# Rust
+/target/
+Cargo.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Local
+*.local
+.env
+
+# Submodule build artifacts (genesis-agi)
+deps/genesis-agi/target/
