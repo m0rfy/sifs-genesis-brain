@@ -1,0 +1,13 @@
+# Brain config for CPU brain (sifs_genesis_hybrid) — контракт A.4, BRAIN_CONTRACT.
+# Бинарник пока может не читать TOML; значения по умолчанию в BrainConfig.
+
+[brain]
+n_neurons = 1000
+steps_per_observation = 1
+night_interval = 500
+v0 = 0.02
+
+[sifs]
+enabled = true
+# v0 при необходимости можно переопределить здесь; иначе берётся из [brain].v0
+# v0 = 0.02

@@ -1,3 +1,20 @@
-[workspace]
-resolver = "2"
-members = ["crates/sifs-genesis-core"]
+[package]
+name = "sifs-genesis-hybrid"
+version = "0.1.0"
+edition = "2021"
+description = "SIFS mathematical core with Genesis GPU architecture"
+
+[[bin]]
+name = "sifs_genesis_hybrid"
+path = "src/main.rs"
+
+[dependencies]
+rayon = "1.7"
+serde_json = "1.0"
+
+[dev-dependencies]
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1

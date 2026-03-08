@@ -1,6 +1,5 @@
 # Rust
 /target/
-Cargo.lock
 
 # IDE
 .idea/
@@ -19,3 +18,7 @@ config/brain.toml
 
 # Submodule build artifacts (genesis-agi)
 deps/genesis-agi/target/
+
+# Python
+__pycache__/
+.pytest_cache/
