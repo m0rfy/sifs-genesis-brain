@@ -4,7 +4,7 @@
 
 - **Репозиторий:** https://github.com/m0rfy/sifs-genesis-brain (доступы — m0rfy)
 - **Константы SIFS:** единственный источник — [core.py](../sifs_ft/strategies/modules/core.py) в проекте SIFS; в Rust — синхронно с ним (см. [docs/BRAIN_CONTRACT.md](docs/BRAIN_CONTRACT.md)).
-- **План реализации:** [.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md](../.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md)
+- **План реализации:** см. внутреннюю документацию проекта (вне этого репо).
 
 ## Текущий статус
 

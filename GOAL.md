@@ -26,6 +26,6 @@
 
 ## Ссылки
 
-- План: [.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md](../.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md)
+- План: см. внутреннюю документацию проекта (вне этого репо).
 - Контракт: [docs/BRAIN_CONTRACT.md](docs/BRAIN_CONTRACT.md)
 - Genesis-agi: [deps/genesis-agi](deps/genesis-agi), [документация Genesis](https://github.com/H4V1K-dev/genesis-agi/tree/master/docs/specs)

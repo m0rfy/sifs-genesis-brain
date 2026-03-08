@@ -11,5 +11,11 @@ Cargo.lock
 *.local
 .env
 
+# Локальный конфиг (в репо только brain.example.toml)
+config/brain.toml
+
+# Планы Cursor (если появятся внутри репо — не коммитить)
+.cursor/
+
 # Submodule build artifacts (genesis-agi)
 deps/genesis-agi/target/
