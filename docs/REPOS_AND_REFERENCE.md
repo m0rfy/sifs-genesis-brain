@@ -8,9 +8,9 @@
 
 | Путь | Что это | Git / источник |
 |------|---------|----------------|
-| **Genesis/** | Наш CPU-мозг (один крейт: sifs_genesis_hybrid.rs, --agent, --serve). Константы K, φ, FIB, W(n), I_SIFS, Day/Night. | Нет своего .git — часть workspace Projects. |
-| **genesis-agi/** | Полный стек Genesis (CUDA, node, baker). Наша копия для встраивания SIFS (genesis-core/sifs.rs, physics.cu). | Клон `https://github.com/H4V1K-dev/genesis-agi.git` |
-| **sifs-genesis-brain/** | Мозг SIFS поверх Genesis: крейт sifs-genesis-core, brain_client.py, скрипты. Внутри submodule deps/genesis-agi. | Клон `https://github.com/m0rfy/sifs-genesis-brain` — репо создан, первый коммит запушен. |
+| **sifs-genesis-brain** (этот репо) | **Источник правды:** дерево Genesis — один крейт sifs-genesis-hybrid (src/), run_cartpole_agent.py, experiments, docs. Submodule deps/genesis-agi. | Клон `https://github.com/m0rfy/sifs-genesis-brain` |
+| **Genesis/** (в Projects) | Локальная рабочая копия того же дерева (без своего .git). Синхронизировать с репо по необходимости. | Часть workspace Projects. |
+| **genesis-agi/** | Полный стек Genesis (CUDA, node, baker). Копия для встраивания SIFS; в репо — как submodule deps/genesis-agi. | Клон `https://github.com/H4V1K-dev/genesis-agi.git` |
 
 Без локальных клонов **genesis-agi** и **sifs-genesis-brain** нельзя сверять протокол и константы с «основным рабочим» кодом с GitHub. Рекомендация: держать оба клона актуальными (`git pull`); при клонировании sifs-genesis-brain — `git clone --recurse-submodules`.
 
@@ -23,16 +23,16 @@
 Сверка:
 - **Genesis/** (наш CPU) и **core.py** — скрипт [scripts/compare_sifs.py](../scripts/compare_sifs.py) (A.1). Бинарник `sifs_genesis_hybrid --compute-sifs` vs Python I_SIFS при одинаковом входе; допуск в скрипте.
 - **genesis-agi** — константы в [genesis-core/src/sifs.rs](../../genesis-agi/genesis-core/src/sifs.rs) и в [genesis-compute CUDA](../../genesis-agi/genesis-compute/src/cuda/physics.cu). При изменении core.py обновить эти файлы и проверить регрессию.
-- **sifs-genesis-brain** — константы в крейте sifs-genesis-core; по README репо синхронны с core.py. При расхождении — привести к BRAIN_CONTRACT и core.py.
+- **sifs-genesis-brain** (этот репо) — константы в src/ (constants.rs, fixed.rs и т.д.); по BRAIN_CONTRACT синхронны с core.py. При расхождении — привести к BRAIN_CONTRACT и core.py.
 
 ---
 
 ## Как настраивать SIFS корректнее
 
-1. **Константы:** менять только в core.py; затем синхронизировать в Genesis/sifs_genesis_hybrid.rs, при необходимости в genesis-agi (sifs.rs, physics.cu) и в sifs-genesis-brain. Правило: без зелёного `compare_sifs.py` не мержить правки в константы (см. BRAIN_CONTRACT).
+1. **Константы:** менять только в core.py; затем синхронизировать в этом репо (src/), при необходимости в genesis-agi (sifs.rs, physics.cu). Правило: без зелёного `compare_sifs.py` не мержить правки в константы (см. BRAIN_CONTRACT).
 2. **Сверка работы:**  
-   - CPU-цикл: [run_cartpole_agent.py](../run_cartpole_agent.py) → бинарник из **Genesis/** (или из **sifs-genesis-brain** при сборке sifs-genesis-core).  
-   - Референс «мозг + SIFS в одном репо» — **sifs-genesis-brain** (там же brain_client для MCP brain_query). При отличии поведения от нашего Genesis — сравнить протокол входа/выхода с [BRAIN_CONTRACT.md](../BRAIN_CONTRACT.md) и при необходимости привести к одному контракту.
+   - CPU-цикл: [run_cartpole_agent.py](../run_cartpole_agent.py) → бинарник из корня репо (`cargo build --release` → `sifs_genesis_hybrid`).  
+   - Референс «мозг + SIFS» — этот репо. При отличии поведения от локальной копии Genesis — сравнить протокол с [BRAIN_CONTRACT.md](../BRAIN_CONTRACT.md) и привести к одному контракту.
 3. **Обновление клонов:**  
    - `genesis-agi`: `git pull origin main` (или текущая ветка); при конфликтах в наших правках (sifs.rs, physics.cu) — разрешить вручную, сохраняя константы из core.py.  
    - `sifs-genesis-brain`: `git pull` и при наличии submodule — `git submodule update --init --recursive`.
