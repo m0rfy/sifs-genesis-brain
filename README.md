@@ -8,6 +8,11 @@
 - **Контракт:** [BRAIN_CONTRACT.md](BRAIN_CONTRACT.md), константы синхронны с [sifs_ft/strategies/modules/core.py](../sifs_ft/strategies/modules/core.py). Интеграция клиентов (fallback, latency): [docs/CLIENT_INTEGRATION.md](docs/CLIENT_INTEGRATION.md).
 - **Ядро:** константы K, PHI, FIB, W(n), пороги V_th(n) = V₀/φⁿ, I_SIFS в fixed-point, Day Phase (LIF + SIFS), Night Phase (Hebbian ΔS, resharding). S-Sharding: каждый шард (SIFSShard) имеет явный **s_level ∈ [0..9]** — см. [BRAIN_CONTRACT.md](BRAIN_CONTRACT.md) §1.1.
 
+## Основа (Foundations)
+
+- **Теория SIFS:** математическая основа — [SIFS Theory (Spacetime)](https://github.com/m0rfy/SIFS-Theory-Core): константы K, φ, FIB и варпинг W(n) заданы теорией (Scale-Invariant Fractal System), а не подобраны под данные.
+- **Движок Genesis:** архитектура основана на [genesis-agi](https://github.com/H4V1K-dev/genesis-agi) (H4V1K-dev); данный репозиторий — адаптация с ядром SIFS и двухфазным циклом Day/Night (CPU-гибрид и опционально CUDA через submodule).
+
 ## Установка окружения (Rust, CUDA, VS Build Tools)
 
 Для CPU-мозга достаточно **Rust**. Для genesis-agi с CUDA (наша копия) нужны ещё **CUDA Toolkit** и **Visual Studio Build Tools (C++)**. RTX 4090 — compute capability sm_89.
@@ -123,7 +128,10 @@ python run_cartpole_agent.py [--neurons 1000] [--episodes 5]
 
 ## Репозитории и сверка SIFS
 
-Локальные клоны **genesis-agi** (H4V1K-dev/genesis-agi) и **sifs-genesis-brain** (m0rfy/sifs-genesis-brain) — для сверки констант и протокола с «основным рабочим» кодом с GitHub. Эталон констант — core.py; как обновлять клоны и настраивать SIFS: [docs/REPOS_AND_REFERENCE.md](docs/REPOS_AND_REFERENCE.md).
+- **Этот репозиторий:** [m0rfy/sifs-genesis-brain](https://github.com/m0rfy/sifs-genesis-brain) — источник правды по дереву Genesis (SIFS-Genesis CPU-мозг).
+- **Оригинальный движок:** [H4V1K-dev/genesis-agi](https://github.com/H4V1K-dev/genesis-agi) — полный стек (CUDA, node, baker); мы используем его как основу и submodule `deps/genesis-agi` для CUDA-пути.
+
+Локальные клоны обоих репо — для сверки констант и протокола. Эталон констант — core.py; как обновлять клоны и настраивать SIFS: [docs/REPOS_AND_REFERENCE.md](docs/REPOS_AND_REFERENCE.md).
 
 ## Genesis-Node / CUDA + SIFS
 
