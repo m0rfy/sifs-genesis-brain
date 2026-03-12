@@ -1,74 +1,39 @@
-# Полный план «что дальше» (Genesis + SIFS)
+# План «что дальше» (Genesis + SIFS) — краткая версия для репо
 
-Один документ с пошаговым планом. При продолжении диалога можно писать: **«Продолжай по NEXT_PLAN»** или **«Выполняй NEXT_PLAN»** — агент берёт **первый незакрытый шаг** (B.1, D.1, …) и выполняет его. Q.1 (тесты) — только после правок кода или перед завершением сессии, не по умолчанию при «продолжай».
+Краткая сводка текущего шага и закрытых блоков. Все ссылки — только внутри этого репо (docs/, experiments/).
 
-Обновлять: после выполнения шага ставить ✅ и при необходимости править «Текущий шаг».
+**Полный план с командами и всеми шагами:** см. `Genesis/NEXT_PLAN.md` в workspace (вне репо).
 
 ---
 
 ## Текущий шаг
 
-**Сейчас:** **B.1.6** (закрыть B.1 в §13 только при медиане ≥71). С episode_end: сетка 2×2 + 3 повтора — стабильно median 11.0 (steps=5, night=200). Без episode_end лучшая 12.0/11.4. **Q.1:** при правках — `pytest tests/ -v` (14 passed).
+**Сейчас:** **Поток 2** (интерфейс Фаза 2/3) или опционально верификация run_l5_loop / K.4. Блоки L и K.4 закрыты.
+
+**Следующий:** Поток 2 Фаза 2 или Фаза 3 (фронт: Чат | SIFS | Brain | Настройки | Логи); опционально — прогон run_l5_loop для верификации r > 0.72.
 
 ---
 
-## Блок B.1 — CartPole медиана ≥71
+## Закрытые блоки
 
-**Критерий done по плану:** медиана total_reward ≥71 за 50 эпизодов (сид 42), A/B с/без I_SIFS задокументирован. Сейчас медиана ~9–10.
-
-| Шаг | Содержание | Команда / действие | Критерий готовности | Следующий шаг |
-|-----|------------|-------------------|---------------------|---------------|
-| **B.1.1** | Калибровка CPU (скрипт, --night, медиана) | Уже сделано: run_cartpole_agent --night, run_b1_calibration.py, тесты | ✅ Выполнено | B.1.2 |
-| **B.1.2** | Сетка калибровки 2×2 и запись в experiments/ | Уже сделано: B1_calibration_results.md | ✅ Выполнено | B.1.3 |
-| **B.1.3** | Референс genesis-agi: 50 эп., сид 42 | В genesis-agi добавлены --seed, --episodes, вывод Mean/Median; команда `python examples/cartpole/cartpole_client.py --seed 42 --episodes 50`. Таблицу референса заполнить после ручного запуска нод | ✅ Скрипт готов; таблица — после прогона | B.1.4 |
-| **B.1.4** | Расширенная калибровка CPU | Сетка 3×3 (steps 10,15,20 × night 100,200,300), 50 эп.; результат в B1_calibration_results.md | ✅ Выполнено (медиана 9.0 по всем ячейкам) | B.1.5 |
-| **B.1.5** | A/B с/без I_SIFS | Прогон 50 эп. on/off, таблица в B1_status | ✅ Задокументировано в B1_status | B.1.6 |
-| **B.1.6** | Закрытие B.1 в чеклисте | При медиане ≥71: в [GENESIS_SIFS_AI_PLAN.md](GENESIS_SIFS_AI_PLAN.md) §13 отметить B.1 [x]; в CHANGELOG записать «B.1 выполнен»; обновить HOW_TO_CONTINUE | В §13 пункт B.1 отмечен выполненным | Переход к блоку D.1 или «План завершён» |
-| **B.1.опц** | Обучение весов дендритов (если без этого не выйти на 71) | Доработка Night Phase в sifs_genesis_hybrid: обновление весов дендритов по reward/STDP; отдельная задача, оценивается по результатам B.1.4 | Документировано в BRAIN_CONTRACT или отдельном доке | — |
-
----
-
-## Блок D.1 — Бенчмарк GPU 100K–1M
-
-| Шаг | Содержание | Команда / действие | Критерий готовности | Следующий шаг |
-|-----|------------|-------------------|---------------------|---------------|
-| **D.1.1** | Сборка genesis-agi под GPU | В репо genesis-agi: сборка с CUDA (sm_89 или целевой arch), проверка RUN_WINDOWS / README | ✅ Бинарники genesis-node, genesis-baker собираются (CUDA_ARCH=sm_89) | D.1.2 |
-| **D.1.2** | Бенчмарк 100K нейронов | Запуск с размером 100K, замерить время Day Phase и память; записать в experiments/ или genesis-agi/docs | ✅ Конфиг examples/bench_100k, baker 100960 нейронов; нода ~1733 TPS (~0.58 ms/step); B4_benchmarks.md | D.1.3 |
-| **D.1.3** | Бенчмарк 1M нейронов (если железо позволяет) | Аналогично 1M; при OOM или нестабильности — зафиксировать максимум и ограничения | ✅ Конфиг bench_1m, 1_002_016 нейронов; нода ~333 TPS (~3 ms/step); B4_benchmarks.md | ✅ D.1 отмечен в §13 |
-
----
-
-## Блок «Поддержка и качество»
-
-| Шаг | Содержание | Команда / действие | Критерий готовности |
-|-----|------------|-------------------|---------------------|
-| **Q.1** | Тесты после правок или перед завершением сессии | Перед завершением сессии или после правок: `cd Genesis && python -m pytest tests/ -v` | Все тесты зелёные |
-| **Q.2** | Обновление CHANGELOG | После любого значимого изменения: запись в [CHANGELOG.md](CHANGELOG.md) [Unreleased] | Изменения отражены |
-| **Q.3** | Обновление HOW_TO_CONTINUE «Текущий фокус» | При смене приоритета или закрытии пункта §13 | Раздел «Текущий фокус» актуален |
-
----
-
-## Блок «Опционально / позже»
-
-- **brain_query в sifs_agents:** при необходимости подключить Genesis HTTP к brain_query (документ [docs/SIFS_AGENTS_INTEGRATION.md](docs/SIFS_AGENTS_INTEGRATION.md)).
-- **Freqtrade бэктест с мозгом:** прогон sifs_ft с `use_genesis_brain: true` на исторических данных, сравнение с SIFS-only (решения уже можно выгружать через run_d3_backtest --decisions_csv).
-- **D.4 SIFS Theory (Spacetime):** перенос идей только при явном обосновании (см. план §D.4).
-
----
-
-## Порядок выполнения (шаги плана)
-
-1. Определить **текущий шаг** по первому незакрытому в таблицах выше (B.1.3 → B.1.4 → … → D.1.1 → …).
-2. **Выполнить** шаг: команды, правки, тесты; при тяжёлых/многозадачных — привлекать агентов (shell, explore) без запроса пользователя.
-3. **Отметить** выполнение (✅ в таблице, CHANGELOG при необходимости).
-4. **Перейти** к следующему шагу по графе «Следующий шаг» и выполнить его в том же ответе, если это не деструктивное действие и не явный чекпоинт для пользователя.
-5. В конце сообщения кратко указать: **что сделано** и **следующий шаг по плану** (номер и название).
+| Блок | Кратко |
+|------|--------|
+| **B.1** | CartPole медиана ≥71: Python CMA-ES + SIFS median 229; Rust median 18.5. [experiments/B1_status.md](experiments/B1_status.md) |
+| **B.5** | Перенос SIFS-политики в Rust: --load-weights, CMA-ES, A/B. [experiments/B5_AB_RESULTS.md](experiments/B5_AB_RESULTS.md) |
+| **D.1** | Бенчмарк GPU 100K/1M. [experiments/B4_benchmarks.md](experiments/B4_benchmarks.md) |
+| **E.1** | Архитектура SIFS-мозга. [docs/E_SIFS_BRAIN_ARCHITECTURE.md](docs/E_SIFS_BRAIN_ARCHITECTURE.md) |
+| **E.2–E.4** | CartPole в Rust (124), торговля, мультитаск — в работе или частично. [experiments/E2_RUN_RESULTS.md](experiments/E2_RUN_RESULTS.md) |
+| **F** | brain_query, genesis_agi start → Python Brain Server, run_f5_verify. [docs/WORKING_BRAIN_DEMO.md](docs/WORKING_BRAIN_DEMO.md) |
+| **G, H** | Верификация конвейера, OHLCV, run_e3_compare. |
+| **I** | «Думание»: state_in/state_out, think_steps (BRAIN_CONTRACT §3.6), sifs_codec. [docs/I_THINKING_SPEC.md](docs/I_THINKING_SPEC.md), [docs/I_THINKING_CODEC.md](docs/I_THINKING_CODEC.md) |
+| **J** | Чат-CLI с агентами (chat_cli). |
+| **K** | Самообучение: OWN_AI_SELFLEARNING, K.1–K.4 (контракт §3.7, GPU+CPU, петля, «голос»). [docs/K2_GPU_CPU_INTEGRATION.md](docs/K2_GPU_CPU_INTEGRATION.md), [docs/K3_SELFLEARNING_LOOP.md](docs/K3_SELFLEARNING_LOOP.md) |
+| **L** | OFI-сигналы → Freqtrade: L.0–L.5 (формат, стратегия, пайплайн, бэктест, цикл). [docs/OFI_FREQTRADE_SIGNALS.md](docs/OFI_FREQTRADE_SIGNALS.md) |
 
 ---
 
 ## Ссылки
 
 - Чеклист §13: [GENESIS_SIFS_AI_PLAN.md](GENESIS_SIFS_AI_PLAN.md)
+- Лог изменений: [CHANGELOG.md](CHANGELOG.md)
 - Как продолжить в новом чате: [HOW_TO_CONTINUE.md](HOW_TO_CONTINUE.md)
-- B.1 статус и калибровка: [experiments/B1_status.md](experiments/B1_status.md), [experiments/B1_genesis_agi_reference.md](experiments/B1_genesis_agi_reference.md)
-- D.3 следующие шаги: [docs/D3_NEXT_STEPS.md](docs/D3_NEXT_STEPS.md)

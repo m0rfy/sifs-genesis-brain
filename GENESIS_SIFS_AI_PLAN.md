@@ -255,7 +255,7 @@
 - [x] **A.2** S-Sharding (уровни 0..9); связь с Population Coding по §8
 - [x] **A.3** Конфиг [sifs] для genesis-node
 - [x] **A.4** TOML brain.toml + единый контракт CPU/CUDA
-- [ ] **B.1** CartPole медиана ≥71 (отложен до после C; статус: [experiments/B1_status.md](experiments/B1_status.md))
+- [x] **B.1** CartPole медиана ≥71 ✅ Python SIFS-агент (CMA-ES + W(n) 7 уровней): median 229 (seed 42), 240 (123), 217 (456). Rust-мозг: median 18.5 (потолок Hebbian/R-STDP). Скрипты: [scripts/optuna_cartpole_sifs.py](scripts/optuna_cartpole_sifs.py), [scripts/optuna_rust_brain.py](scripts/optuna_rust_brain.py). Статус: [experiments/B1_status.md](experiments/B1_status.md)
 - [x] **B.2** Reward CartPole по §6 (формула в BRAIN_CONTRACT §6; доставка в мозг реализована: JSON reward → Night Phase, run_cartpole_agent шлёт reward)
 - [x] **B.3** Night Phase учитывает s_level (resharding по s_coordinate→s_level в night_phase_plasticity; BRAIN_CONTRACT §1.1)
 - [x] **B.4** Бенчмарки 1K/10K/100K ([experiments/B4_benchmarks.md](experiments/B4_benchmarks.md))
@@ -269,4 +269,10 @@
 - [x] **§9** Данные для торговли при D.3: [docs/TRADING_REWARD_AND_DATA.md](docs/TRADING_REWARD_AND_DATA.md) §9 (источник, train/val, no look-ahead)
 - [x] **D.3** Торговля: цикл бар→мозг→действие (trading_brain_loop, run_d3_backtest §9); опциональный режим мозга в sifs_ft — [sifs_ft/strategies/modules/genesis_brain.py](../sifs_ft/strategies/modules/genesis_brain.py), [entry.py](../sifs_ft/strategies/modules/entry.py) (use_genesis_brain, genesis_brain_url); fallback при недоступности — SIFS оставляется.
 
-*План v2: учтены критические пробелы, риски, операционализация «done» и приоритет верификации гипотезы в фазе A. Изменения плана и контракта — в [CHANGELOG.md](CHANGELOG.md). Как продолжить в новом диалоге без потерь контекста — [HOW_TO_CONTINUE.md](HOW_TO_CONTINUE.md).*
+- [x] **B.5** Перенос SIFS-политики в Rust: B.5.1 экспорт весов ✅ → B.5.2 `--load-weights` (inference) ✅ → B.5.3 CMA-ES в Rust (online) ✅ → B.5.4 A/B ✅ ([B5_AB_RESULTS.md](experiments/B5_AB_RESULTS.md))
+- [x] **E.1** Архитектура SIFS-мозга: [docs/E_SIFS_BRAIN_ARCHITECTURE.md](docs/E_SIFS_BRAIN_ARCHITECTURE.md), код компилируется
+- [ ] **E.2** CartPole median ≥200 в Rust-мозге (**в работе:** Rust 124 при Python 229; нужно выравнивание float32/float64 и порядка фичей; [E2_RUN_RESULTS.md](experiments/E2_RUN_RESULTS.md))
+- [ ] **E.3** Торговля: SIFS-мозг на OHLCV, PnL ≥ SIFS-only baseline
+- [ ] **E.4** Мультизадачность: CartPole + торговля без деградации
+
+*План v3: B.1 закрыт (CMA-ES + SIFS median 229); добавлены B.5 (перенос в Rust) и фаза E (полноценный SIFS-мозг). Изменения плана и контракта — в [CHANGELOG.md](CHANGELOG.md). Как продолжить в новом диалоге без потерь контекста — [HOW_TO_CONTINUE.md](HOW_TO_CONTINUE.md).*
