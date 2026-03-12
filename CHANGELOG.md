@@ -66,6 +66,29 @@
 
 ---
 
+## 2026-03-12 (синхронизация: Genesis, фазы B.5, E–L, K, OFI)
+
+Сводка изменений за период 2025-03-08 — 2026-03-12 (актуализация лога).
+
+### План и эксперименты
+- **B.1:** цель медианы ≥71 достигнута через Python CMA-ES + SIFS (median 229, seeds 42/123/456); Rust Hebbian/R-STDP — потолок median 18.5.
+- **B.5:** перенос SIFS-политики в Rust — экспорт весов, `--load-weights`, режим `--cma-es`, A/B (B5_AB_RESULTS.md).
+- **E.1–E.4:** архитектура SIFS-мозга (E_SIFS_BRAIN_ARCHITECTURE.md), CartPole в Rust (median 124 при Python 229), торговля run_e3_compare, мультитаск.
+- **§13:** B.1, B.5, D.1, D.3, C, блоки E–K отмечены выполненными (актуальное состояние в Genesis/GENESIS_SIFS_AI_PLAN.md).
+
+### Интеграция и контракт
+- **F.4–F.5:** brain_query в sifs_agents, genesis_agi start → Python Brain Server; run_f5_verify.ps1.
+- **G, H:** верификация конвейера; готовность к торговле (OHLCV, run_e3_compare), E.4 шаг B.
+- **I:** «думание» и кодирование — BRAIN_CONTRACT §3.6 (state_in/state_out, think_steps), sifs_codec, буфер в Brain Server.
+- **J:** чат-CLI с агентами (chat_cli.py, chat_cli.cmd).
+- **K:** самообучение (OWN_AI_SELFLEARNING.md), K.1–K.3 (контракт §3.7, GPU+CPU K.2, петля K.3).
+- **L:** OFI-сигналы → Freqtrade (L.0–L.3: формат, стратегия, пайплайн OHLCV→сигналы).
+
+### BRAIN_CONTRACT
+- §3.6 (state_in/state_out, think_steps), §3.7 (материал + reward, контекст).
+
+---
+
 ## 2025-03-07 (продолжение плана, фаза B)
 
 ### Эксперименты и бенчмарки
