@@ -130,6 +130,6 @@
 
 ## 8. Ссылки
 
-- Константы и формулы: [sifs_ft/strategies/modules/core.py](../sifs_ft/strategies/modules/core.py), [документация/SIFS_Theory_Documentation.md](../документация/SIFS_Theory_Documentation.md).
+- Константы и формулы: [sifs_ft/strategies/modules/core.py](../sifs_ft/strategies/modules/core.py), [documents/theory/SIFS_Theory_Documentation.md](../documents/theory/SIFS_Theory_Documentation.md).
 - Прототип: [Genesis/sifs_genesis_hybrid.rs](sifs_genesis_hybrid.rs), [SIFS_Genesis_Hybrid_Report.md](SIFS_Genesis_Hybrid_Report.md).
 - План реализации: [.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md](../.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md).

@@ -25,7 +25,7 @@
 
 | Слой | Что есть | Где |
 |------|----------|-----|
-| Теория SIFS | K, φ, FIB, W(n), V_th(n), I_SIFS | core.py, документация/, BRAIN_CONTRACT |
+| Теория SIFS | K, φ, FIB, W(n), V_th(n), I_SIFS | core.py, documents/, BRAIN_CONTRACT |
 | CPU-мозг | Day/Night, readout, --agent, --serve | Genesis/sifs_genesis_hybrid.rs |
 | Genesis-agi (копия) | CUDA sm_89, baker, node, I_SIFS в physics.cu | genesis-agi/ |
 | E2E | Baking + 2 ноды + UDP клиент | RUN_WINDOWS.md, RX GSOO OK |
@@ -242,7 +242,7 @@
 | [CHANGELOG.md](CHANGELOG.md) | Лог изменений плана, контракта и решений (дата, добавлено/изменено) |
 | [HOW_TO_CONTINUE.md](HOW_TO_CONTINUE.md) | Как продолжить в новом диалоге: что сказать, какие файлы приложить, текущий фокус |
 | [GENESIS_CUDA_SIFS.md](GENESIS_CUDA_SIFS.md) | Сборка CUDA, встраивание SIFS |
-| [документация/SIFS_Theory_Documentation.md](../документация/SIFS_Theory_Documentation.md) | Теория SIFS |
+| [documents/theory/SIFS_Theory_Documentation.md](../documents/theory/SIFS_Theory_Documentation.md) | Теория SIFS |
 | CLAUDE.md | Мультиагентная система, sifs_agents, MCP |
 
 ---

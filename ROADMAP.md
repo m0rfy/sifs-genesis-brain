@@ -103,4 +103,4 @@ cd Genesis
 - Контракт входа/выхода и константы: [BRAIN_CONTRACT.md](BRAIN_CONTRACT.md).
 - Путь к CUDA и что менять в genesis-compute: [GENESIS_CUDA_SIFS.md](GENESIS_CUDA_SIFS.md).
 - Расширенный план (репо sifs-genesis-brain, фазы 0–4): [.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md](../.cursor/plans/реализация_мозга_sifs-genesis_2dafb180.plan.md).
-- Эталон констант и формул: [sifs_ft/strategies/modules/core.py](../sifs_ft/strategies/modules/core.py), [документация/SIFS_Theory_Documentation.md](../документация/SIFS_Theory_Documentation.md).
+- Эталон констант и формул: [sifs_ft/strategies/modules/core.py](../sifs_ft/strategies/modules/core.py), [documents/theory/SIFS_Theory_Documentation.md](../documents/theory/SIFS_Theory_Documentation.md).
