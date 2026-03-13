@@ -1,8 +1,8 @@
 # Мозг SIFS-Genesis — контракт (I/O, константы, тайминг)
 
-Эталон для интеграции мозга с genesis-agi и MCP. Версия констант и форматов — единый источник истины между Python (core.py), Rust (sifs-genesis-brain) и SIFS Live.
+Эталон для интеграции мозга с genesis-agi и MCP. Версия констант и форматов — единый эталон между Python (core.py), Rust (sifs-genesis-brain) и SIFS Live.
 
-**Основа:** математика констант (K, φ, FIB, W) — из [теории SIFS](https://github.com/m0rfy/SIFS-Theory-Core); архитектура движка — из [genesis-agi](https://github.com/H4V1K-dev/genesis-agi) (H4V1K-dev).
+**Основа:** математика констант (K, φ, FIB, W) — из [теории SIFS](https://github.com/m0rfy/SIFS-Theory-Core); архитектура движка — из [genesis-agi](https://github.com/H4V1K-dev/genesis-agi) (H4V1K-dev). Genesis-AGI — отдельный независимый проект; мы не его авторы. Мы взяли их разработки и соединили с нашей теорией SIFS.
 
 ---
 

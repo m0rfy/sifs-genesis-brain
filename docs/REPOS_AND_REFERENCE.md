@@ -2,13 +2,15 @@
 
 Где лежат локальные копии «Genesis» с GitHub и как сверять константы и работу мозга.
 
+**Примечание:** Genesis-AGI — отдельный независимый проект (H4V1K-dev). Мы не его авторы; мы взяли у них разработки и объединили с теорией SIFS.
+
 ---
 
 ## Что есть в проекте (локально)
 
 | Путь | Что это | Git / источник |
 |------|---------|----------------|
-| **sifs-genesis-brain** (этот репо) | **Источник правды:** дерево Genesis — один крейт sifs-genesis-hybrid (src/), run_cartpole_agent.py, experiments, docs. Submodule deps/genesis-agi. | Клон `https://github.com/m0rfy/sifs-genesis-brain` |
+| **sifs-genesis-brain** (этот репо) | **Канонический репо SIFS-Genesis:** дерево Genesis — один крейт sifs-genesis-hybrid (src/), run_cartpole_agent.py, experiments, docs. Submodule deps/genesis-agi. | Клон `https://github.com/m0rfy/sifs-genesis-brain` |
 | **Genesis/** (в Projects) | Локальная рабочая копия того же дерева (без своего .git). Синхронизировать с репо по необходимости. | Часть workspace Projects. |
 | **genesis-agi/** | Полный стек Genesis (CUDA, node, baker). Копия для встраивания SIFS; в репо — как submodule deps/genesis-agi. | Клон `https://github.com/H4V1K-dev/genesis-agi.git` |
 
@@ -18,7 +20,7 @@
 
 ## Эталон констант SIFS
 
-**Единственный источник истины по числам:** [sifs_ft/strategies/modules/core.py](../../sifs_ft/strategies/modules/core.py) (K, PHI, FIB, W(n), V_th(n)=V₀/φⁿ).  
+**Единый эталон по числам:** [sifs_ft/strategies/modules/core.py](../../sifs_ft/strategies/modules/core.py) (K, PHI, FIB, W(n), V_th(n)=V₀/φⁿ).  
 
 Сверка:
 - **Genesis/** (наш CPU) и **core.py** — скрипт [scripts/compare_sifs.py](../scripts/compare_sifs.py) (A.1). Бинарник `sifs_genesis_hybrid --compute-sifs` vs Python I_SIFS при одинаковом входе; допуск в скрипте.

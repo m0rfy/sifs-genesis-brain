@@ -81,7 +81,7 @@
 | Пункт | Содержание | Done-критерий |
 |-------|------------|----------------|
 | **A.0** | Гипотеза SIFS→GLIF: формулировка + эксперимент (I_SIFS on/off), результат зафиксирован в плане | Файл или таблица с результатами A/B; вывод: подтверждено / опровергнуто / неоднозначно |
-| **A.1** | Константы: один источник истины (core.py ↔ genesis-core/sifs.rs ↔ physics.cu). **Автоматическая** регрессия I_SIFS Rust vs Python в CI (скрипт compare_sifs_i_sifs.py или аналог, допуск в fixed-point задан). | CI job или pre-commit: при изменении core.py/sifs.rs тест падает, пока регрессия не пройдена |
+| **A.1** | Константы: один эталон (core.py ↔ genesis-core/sifs.rs ↔ physics.cu). **Автоматическая** регрессия I_SIFS Rust vs Python в CI (скрипт compare_sifs_i_sifs.py или аналог, допуск в fixed-point задан). | CI job или pre-commit: при изменении core.py/sifs.rs тест падает, пока регрессия не пройдена |
 | **A.2** | S-Sharding: привязка нейронов/шардов к S-уровням 0..9 в baker или конфиге зоны | Конфиг и код: каждый шард/зона имеет s_level ∈ [0..9]; документировано |
 | **A.3** | Конфиг [sifs] для genesis-node: V₀, опционально K/PHI/FIB, ссылка на BRAIN_CONTRACT | Пример в manifest или TOML; node читает [sifs] |
 | **A.4** | TOML для CPU-мозга (Genesis/brain.toml) и единый контракт входа/выхода для CPU и CUDA | Один формат наблюдение→действие в BRAIN_CONTRACT; CPU и node его соблюдают |

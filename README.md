@@ -1,6 +1,6 @@
 # SIFS Brain (Genesis)
 
-**Источник правды:** это репо — дерево [Genesis](https://github.com/m0rfy/sifs-genesis-brain) (SIFS-Genesis CPU-мозг). Клонируйте и собирайте отсюда.
+Этот репозиторий — каноническое дерево **SIFS-Genesis** (CPU-мозг). **Genesis-AGI — отдельный независимый проект** ([H4V1K-dev/genesis-agi](https://github.com/H4V1K-dev/genesis-agi)); мы не его авторы. Мы взяли у них разработки Genesis и соединили с **нашей теорией SIFS** — так получился этот проект. Клонируйте и собирайте отсюда.
 
 Полноценный мозг с ядром SIFS (K, φ, W(n), FIB) и двухфазным циклом Day/Night. Один бинарник для локального запуска или работы на сервере. **Один мозг — несколько сред:** CartPole и торговый мини (OHLCV → long/short/hold) — первые две среды для валидации и продакшена; цель фазы D — один агент для ≥2 сред без деградации.
 
@@ -11,7 +11,7 @@
 ## Основа (Foundations)
 
 - **Теория SIFS:** математическая основа — [SIFS Theory (Spacetime)](https://github.com/m0rfy/SIFS-Theory-Core): константы K, φ, FIB и варпинг W(n) заданы теорией (Scale-Invariant Fractal System), а не подобраны под данные.
-- **Движок Genesis:** архитектура основана на [genesis-agi](https://github.com/H4V1K-dev/genesis-agi) (H4V1K-dev); данный репозиторий — адаптация с ядром SIFS и двухфазным циклом Day/Night (CPU-гибрид и опционально CUDA через submodule).
+- **Движок Genesis:** Genesis-AGI — отдельный проект (H4V1K-dev). Мы взяли у них движок Genesis и объединили с нашей теорией SIFS (ядро K, φ, FIB, W, двухфазный цикл Day/Night). Данный репозиторий — CPU-гибрид и опционально CUDA через submodule [genesis-agi](https://github.com/H4V1K-dev/genesis-agi).
 
 ## Установка окружения (Rust, CUDA, VS Build Tools)
 
@@ -128,7 +128,7 @@ python run_cartpole_agent.py [--neurons 1000] [--episodes 5]
 
 ## Репозитории и сверка SIFS
 
-- **Этот репозиторий:** [m0rfy/sifs-genesis-brain](https://github.com/m0rfy/sifs-genesis-brain) — источник правды по дереву Genesis (SIFS-Genesis CPU-мозг).
+- **Этот репозиторий:** [m0rfy/sifs-genesis-brain](https://github.com/m0rfy/sifs-genesis-brain) — канонический репозиторий дерева SIFS-Genesis (CPU-мозг). Genesis-AGI — отдельный проект; мы взяли у них исходники и соединили с нашей теорией SIFS.
 - **Оригинальный движок:** [H4V1K-dev/genesis-agi](https://github.com/H4V1K-dev/genesis-agi) — полный стек (CUDA, node, baker); мы используем его как основу и submodule `deps/genesis-agi` для CUDA-пути.
 
 Локальные клоны обоих репо — для сверки констант и протокола. Эталон констант — core.py; как обновлять клоны и настраивать SIFS: [docs/REPOS_AND_REFERENCE.md](docs/REPOS_AND_REFERENCE.md).
